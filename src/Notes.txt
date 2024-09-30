@@ -1,0 +1,9 @@
+big problem with old system was being able to show a list of the jobs.
+
+The job list will include data from multiple microservices.
+
+So should we maintain a searchable list of jobs with aggregated/merged data?
+
+perhaps in Solr/elasticsearch
+
+whenever a JobUpdatedIntegrationEvent/created/deleted is received, completely refresh the record for that job.

@@ -1,0 +1,7 @@
+this is where we store everything related to companies
+
+companies
+company relationships
+company configuration
+&c.
+vessels

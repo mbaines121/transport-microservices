@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  operationsdb:
+    image: postgres
+
+  operations.api:
+    image: ${DOCKER_REGISTRY-}operationsapi
+    build:
+      context: .
+      dockerfile: Services/Operations/Operations.API/Dockerfile
+
+volumes:
+  postgres_operations:
