@@ -15,7 +15,7 @@ variables:
   dockerRegistryServiceConnection: '703aa575-162a-4bcb-b730-edc66f73b798'
   imageRepository: 'operationsapi'
   containerRegistry: 'transportacr.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
+  dockerfilePath: 'src/Services/Operations/Operations.API/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'transportacr1345436e-auth'
 
