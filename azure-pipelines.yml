@@ -11,7 +11,7 @@ resources:
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '6aeb5d9b-0096-4077-833a-23a82df8b7a5'
-  imageRepository: 'mbainestransportmicroservices'
+  imageRepository: 'operationsapi'
   containerRegistry: 'transportacr.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/src/Services/Operations/Operations.API/Dockerfile'
   tag: '$(Build.BuildId)'
