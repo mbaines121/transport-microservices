@@ -1,16 +1,17 @@
-# Deploy to Azure Kubernetes Service
-# Build and push image to Azure Container Registry; Deploy to Azure Kubernetes Service
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
 trigger:
-- master
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - src/Services/Operations/OperationsAPI/*
+      - manifests/operationsapi.yaml
 
 resources:
 - repo: self
 
 variables:
 
-  # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '703aa575-162a-4bcb-b730-edc66f73b798'
   imageRepository: 'operationsapi'
   containerRegistry: 'transportacr.azurecr.io'
@@ -18,9 +19,7 @@ variables:
   tag: '$(Build.BuildId)'
   imagePullSecret: 'transportacr1345436e-auth'
 
-  # Agent VM image name
   vmImageName: 'ubuntu-latest'
-
 
 stages:
 - stage: Build

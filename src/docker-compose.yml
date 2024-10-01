@@ -10,5 +10,11 @@ services:
       context: .
       dockerfile: Services/Operations/Operations.API/Dockerfile
 
+  suppliers.api:
+    image: ${DOCKER_REGISTRY-}suppliersapi
+    build:
+      context: .
+      dockerfile: Services/Suppliers/Suppliers.API/Dockerfile
+
 volumes:
   postgres_operations:
