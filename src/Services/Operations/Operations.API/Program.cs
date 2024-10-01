@@ -3,7 +3,13 @@ using HealthChecks.UI.Client;
 var builder = WebApplication.CreateBuilder(args);
 
 var assembly = typeof(Program).Assembly;
-var databaseConnectionString = builder.Configuration.GetConnectionString("Database");
+
+var databaseConnectionString = builder.Configuration.GetConnectionString("LocalDatabase");
+
+if (!builder.Environment.IsDevelopment())
+{
+    databaseConnectionString = builder.Configuration.GetConnectionString("AzureDatabase");
+}
 
 builder.Services.AddCarter();
 builder.Services.AddMediatR(config =>
@@ -13,6 +19,17 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(LoggingBehaviour<,>));
 });
 
+builder.Services.AddMarten(config =>
+{
+    config.Connection(databaseConnectionString!);
+    config.Schema.For<Job>().Identity(m => m.JobId);
+}).UseLightweightSessions();
+
+builder.Services.AddScoped<IJobRepository, JobRepository>();
+
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+builder.Services.AddValidatorsFromAssembly(assembly);
+
 builder.Services.AddHealthChecks()
     .AddNpgSql(databaseConnectionString!);
 
@@ -20,7 +37,7 @@ var app = builder.Build();
 
 app.MapCarter();
 
-app.MapGet("/", () => "Operations API");
+app.UseExceptionHandler(options => { });
 
 app.UseHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
 {

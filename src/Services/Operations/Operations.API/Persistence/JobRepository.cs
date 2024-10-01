@@ -1,10 +1,11 @@
-﻿
-namespace Operations.API.Persistence;
+﻿namespace Operations.API.Persistence;
 
-public class JobRepository : IJobRepository
+public class JobRepository(ILogger<JobRepository> _logger) : IJobRepository
 {
-    public Task<Job> CreateJob(Job job, CancellationToken cancellationToken)
+    public async Task<Guid> CreateJob(Job job, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        _logger.LogInformation("[Handled create job]");
+
+        return Guid.NewGuid();
     }
 }
