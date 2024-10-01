@@ -1,0 +1,30 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: suppliersapi 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: suppliersapi
+  template:
+    metadata:
+      labels:
+        app: suppliersapi 
+    spec:
+      containers:
+        - name: suppliersapi 
+          image: transportacr.azurecr.io/suppliersapi
+          ports:
+          - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: suppliersapi
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 8080 
+    selector:
+        app: suppliersapi
