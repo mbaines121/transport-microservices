@@ -44,4 +44,6 @@ app.UseHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
 
+app.MapGet("/", () => "Operations API");
+
 app.Run();

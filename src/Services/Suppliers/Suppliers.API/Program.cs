@@ -15,4 +15,6 @@ app.UseHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
 
+app.MapGet("/", () => "Suppliers API");
+
 app.Run();
