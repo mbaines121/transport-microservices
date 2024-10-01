@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: operationsapi 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: operationsapi
+  template:
+    metadata:
+      labels:
+        app: operationsapi 
+    spec:
+      containers:
+        - name: operationsapi 
+          image: transportacr.azurecr.io/operationsapi
+          ports:
+          - containerPort: 8080
