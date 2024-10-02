@@ -1,30 +1,53 @@
-apiVersion : apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: operationsapi 
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+    kompose.version: 1.34.0 (cbf2835db)
+  labels:
+    io.kompose.service: operations-api
+  name: operations-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: operationsapi
+      io.kompose.service: operations-api
   template:
     metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+        kompose.version: 1.34.0 (cbf2835db)
       labels:
-        app: operationsapi 
+        io.kompose.service: operations-api
     spec:
       containers:
-        - name: operationsapi 
-          image: transportacr.azurecr.io/operationsapi
-          ports:
-          - containerPort: 8080
+        - image: operationsapi
+          name: operations.api
+      restartPolicy: Always
 ---
-apiVersion: v1
-kind: Service
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-    name: operationsapi
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+    kompose.version: 1.34.0 (cbf2835db)
+  labels:
+    io.kompose.service: operationsdb
+  name: operationsdb
 spec:
-    type: LoadBalancer
-    ports:
-    - port: 8080 
-    selector:
-        app: operationsapi
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: operationsdb
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+        kompose.version: 1.34.0 (cbf2835db)
+      labels:
+        io.kompose.service: operationsdb
+    spec:
+      containers:
+        - image: postgres
+          name: operationsdb
+      restartPolicy: Always

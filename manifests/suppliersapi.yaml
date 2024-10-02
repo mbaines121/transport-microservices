@@ -1,30 +1,26 @@
-apiVersion : apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: suppliersapi 
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+    kompose.version: 1.34.0 (cbf2835db)
+  labels:
+    io.kompose.service: suppliers-api
+  name: suppliers-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: suppliersapi
+      io.kompose.service: suppliers-api
   template:
     metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+        kompose.version: 1.34.0 (cbf2835db)
       labels:
-        app: suppliersapi 
+        io.kompose.service: suppliers-api
     spec:
       containers:
-        - name: suppliersapi 
-          image: transportacr.azurecr.io/suppliersapi
-          ports:
-          - containerPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-    name: suppliersapi
-spec:
-    type: LoadBalancer
-    ports:
-    - port: 8080 
-    selector:
-        app: suppliersapi
+        - image: suppliersapi
+          name: suppliers.api
+      restartPolicy: Always
