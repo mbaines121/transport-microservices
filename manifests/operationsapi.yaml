@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - image: operationsapi
-          name: operations.api
+          name: operationsapi
       restartPolicy: Always
 ---
 apiVersion: apps/v1
