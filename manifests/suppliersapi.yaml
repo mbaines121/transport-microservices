@@ -1,30 +1,68 @@
-apiVersion : apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: suppliersapi 
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+    kompose.version: 1.34.0 (cbf2835db)
+  labels:
+    io.kompose.service: suppliersapi
+  name: suppliersapi
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: suppliersapi
+      io.kompose.service: suppliersapi
+  strategy:
+    type: Recreate
   template:
     metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+        kompose.version: 1.34.0 (cbf2835db)
       labels:
-        app: suppliersapi 
+        io.kompose.service: suppliersapi
     spec:
       containers:
-        - name: suppliersapi 
-          image: transportacr.azurecr.io/suppliersapi
+        - env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Production
+            - name: ASPNETCORE_HTTPS_PORTS
+              value: "8081"
+            - name: ASPNETCORE_HTTP_PORTS
+              value: "8080"
+          image: suppliersapi
+          name: suppliersapi
           ports:
-          - containerPort: 8080
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8081
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /home/app/.aspnet/https
+              name: suppliersapi-cm1
+              readOnly: true
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            name: suppliersapi-cm1
+          name: suppliersapi-cm1
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: suppliersapi
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+    kompose.version: 1.34.0 (cbf2835db)
+  labels:
+    io.kompose.service: suppliersapi
+  name: suppliersapi
 spec:
-    type: LoadBalancer
-    ports:
-    - port: 8080 
-    selector:
-        app: suppliersapi
+  ports:
+    - name: "6102"
+      port: 6102
+      targetPort: 8080
+    - name: "6162"
+      port: 6162
+      targetPort: 8081
+  selector:
+    io.kompose.service: suppliersapi

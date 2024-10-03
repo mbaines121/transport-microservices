@@ -6,6 +6,7 @@ trigger:
     include:
       - src/Services/Operations/Operations.API/*
       - manifests/operationsapi.yaml
+      - manifests/operationsdb.yaml
 
 resources:
 - repo: self

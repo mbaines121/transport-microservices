@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+    kompose.version: 1.34.0 (cbf2835db)
+  labels:
+    io.kompose.service: operationsdb
+  name: operationsdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: operationsdb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+        kompose.version: 1.34.0 (cbf2835db)
+      labels:
+        io.kompose.service: operationsdb
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              value: OperationsDb
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: POSTGRES_USER
+              value: postgres
+          image: postgres
+          name: operationsdb
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-operations
+      restartPolicy: Always
+      volumes:
+        - name: postgres-operations
+          persistentVolumeClaim:
+            claimName: postgres-operations
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+    kompose.version: 1.34.0 (cbf2835db)
+  labels:
+    io.kompose.service: operationsdb
+  name: operationsdb
+spec:
+  ports:
+    - name: "5434"
+      port: 5434
+      targetPort: 5432
+  selector:
+    io.kompose.service: operationsdb
