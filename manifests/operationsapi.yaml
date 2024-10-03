@@ -4,9 +4,6 @@ metadata:
   name: operationsapi
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      io.kompose.service: operationsapi
   strategy:
     type: Recreate
   template:
