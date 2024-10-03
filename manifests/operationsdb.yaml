@@ -60,3 +60,16 @@ spec:
       targetPort: 5432
   selector:
     io.kompose.service: operationsdb
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    io.kompose.service: postgres-operations
+  name: postgres-operations
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
