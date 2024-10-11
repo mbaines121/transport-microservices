@@ -1,7 +1,4 @@
-﻿using BuildingBlocks.CQRS;
-using Operations.API.Persistence;
-
-namespace Operations.API.Jobs.CreateJob;
+﻿namespace Operations.API.Jobs.CreateJob;
 
 public record CreateJobCommand(Job job) : ICommand<CreateJobResult>;
 
