@@ -19,4 +19,6 @@ var app = builder.Build();
 app.UseRateLimiter();
 app.MapReverseProxy();
 
+app.MapGet("/", () => "API Gateway");
+
 app.Run();
