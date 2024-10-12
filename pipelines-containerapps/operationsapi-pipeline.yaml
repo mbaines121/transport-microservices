@@ -56,3 +56,4 @@ stages:
         targetPort: '8080'
         location: 'uksouth'
         ingress: 'external'
+        acrName: 'transportacr'
