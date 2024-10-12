@@ -49,10 +49,13 @@ stages:
     - task: AzureContainerApps@1
       inputs:
         azureSubscription: 'Azure subscription 1(ac6df0a6-4361-4fcc-b232-1c938d623a03)'
-        imageToDeploy: 'transportacr.azurecr.io/operationsapi:latest'
+        imageToDeploy: 'transportacr.azurecr.io/operationsapi:$(Build.BuildId)'
         containerAppName: 'operationsapi-container-app'
         resourceGroup: 'transport-microservices-rg'
         containerAppEnvironment: 'transport-microservices-env-prod'
         targetPort: '8080'
         location: 'uksouth'
         ingress: 'external'
+        acrName: 'transportacr.azurecr.io'
+        acrUsername: ''
+        acrPassword: ''
