@@ -12,7 +12,7 @@ resources:
 - repo: self
 
 variables:
-  dockerRegistryServiceConnection: '2dd85add-430d-4b53-9afc-69927a967c47'
+  dockerRegistryServiceConnection: '6df85c80-9463-489d-bf10-2e4ec454e7aa'
   imageRepository: 'operationsapi'
   containerRegistry: 'transportacr.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/src/Services/Operations/Operations.API/Dockerfile'
