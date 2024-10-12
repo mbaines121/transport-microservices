@@ -1,0 +1,66 @@
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - src/Services/Operations/Operations.API/*
+      - manifests/operationsapi.yaml
+      - manifests/operationsdb.yaml
+
+resources:
+- repo: self
+
+variables:
+  dockerRegistryServiceConnection: '2dd85add-430d-4b53-9afc-69927a967c47'
+  imageRepository: 'operationsapi'
+  containerRegistry: 'transportacr.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/src/Services/Operations/Operations.API/Dockerfile'
+  tag: '$(Build.BuildId)'
+  imagePullSecret: 'transportacr1345436e-auth'
+  vmImageName: 'ubuntu-latest'
+  ado-env: 'transport-microservices-env-prod'
+  azureServiceConnection: ''
+  aca-name: 'operationsapi-container-app'
+  aca-rg: 'transport-microservices-rg'
+  aca-repo: ''
+
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        buildContext: $(Build.SourcesDirectory)/src
+        tags: |
+          $(tag)
+
+- stage: Deploy
+  displayName: Deploy ACA 
+  dependsOn: Build
+  jobs:
+  - deployment: ACADeploy
+    displayName: Deploy Azure Container App
+    environment: $(ado-env)
+    strategy: 
+      runOnce:
+          deploy:
+            steps:
+            - task: AzureCLI@2
+              displayName: Updating ACA image 
+              inputs:
+                azureSubscription: $(azureServiceConnection)
+                scriptType: 'pscore'
+                scriptLocation: 'inlineScript'
+                inlineScript: |
+                    az containerapp update -n $(aca-name) -g $(aca-rg) --image $(aca-acr)/$(aca-repo):$(Build.BuildId)
