@@ -53,5 +53,5 @@ stages:
         containerAppEnvironment: 'transport-microservices-env-prod'
         targetPort: '8080'
         location: 'uksouth'
-        ingress: 'external'
+        ingress: 'internal'
         acrName: 'transportacr'

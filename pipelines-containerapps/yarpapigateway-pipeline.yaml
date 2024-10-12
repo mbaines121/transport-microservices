@@ -4,16 +4,16 @@ trigger:
       - master
   paths:
     include:
-      - src/Services/Suppliers/Suppliers.API/*
+      - src/ApiGateway/YarpApiGateway/*
 
 resources:
 - repo: self
 
 variables:
   dockerRegistryServiceConnection: '6df85c80-9463-489d-bf10-2e4ec454e7aa'
-  imageRepository: 'suppliersapi'
+  imageRepository: 'yarpapigateway'
   containerRegistry: 'transportacr.azurecr.io'
-  dockerfilePath: 'src/Services/Suppliers/Suppliers.API/Dockerfile'
+  dockerfilePath: 'src/ApiGateway/YarpApiGateway/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'transportacr1345436e-auth'
   vmImageName: 'ubuntu-latest'
@@ -48,10 +48,10 @@ stages:
       inputs:
         azureSubscription: 'Azure subscription 1(ac6df0a6-4361-4fcc-b232-1c938d623a03)'
         imageToDeploy: 'transportacr.azurecr.io/suppliersapi:$(Build.BuildId)'
-        containerAppName: 'suppliersapi-container-app'
+        containerAppName: 'yarpapigateway-container-app'
         resourceGroup: 'transport-microservices-rg'
         containerAppEnvironment: 'transport-microservices-env-prod'
         targetPort: '8080'
         location: 'uksouth'
-        ingress: 'internal'
+        ingress: 'external'
         acrName: 'transportacr'

@@ -19,11 +19,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FreightRates", "FreightRate
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dashboard", "Dashboard", "{D9ABE1B8-D9FD-4574-A5D4-CA7BA2D7DA1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks", "BuildingBlocks\BuildingBlocks.csproj", "{46E12BF7-AC4D-40A4-85F3-5D834E6F1C59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingBlocks", "BuildingBlocks\BuildingBlocks.csproj", "{46E12BF7-AC4D-40A4-85F3-5D834E6F1C59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Operations.API", "Services\Operations\Operations.API\Operations.API.csproj", "{F912CFC4-A92C-4D6D-841C-A1E3C170A3B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Operations.API", "Services\Operations\Operations.API\Operations.API.csproj", "{F912CFC4-A92C-4D6D-841C-A1E3C170A3B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Suppliers.API", "Services\Suppliers\Suppliers.API\Suppliers.API.csproj", "{BC7B28D8-9D31-4940-9690-8F30E03A6A7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Suppliers.API", "Services\Suppliers\Suppliers.API\Suppliers.API.csproj", "{BC7B28D8-9D31-4940-9690-8F30E03A6A7F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JobList", "JobList", "{E60E4E7C-F9D4-41D5-801C-458A86E7E73C}"
 	ProjectSection(SolutionItems) = preProject
@@ -38,6 +38,8 @@ EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{B316065A-53A8-431E-8010-10D87FE4920A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{6E59A115-54A7-44D4-9222-C48681D6BD73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarpApiGateway", "ApiGateway\YarpApiGateway\YarpApiGateway.csproj", "{ADE8C43E-58B3-4FD9-9F70-D74A852090D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{B316065A-53A8-431E-8010-10D87FE4920A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B316065A-53A8-431E-8010-10D87FE4920A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B316065A-53A8-431E-8010-10D87FE4920A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADE8C43E-58B3-4FD9-9F70-D74A852090D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADE8C43E-58B3-4FD9-9F70-D74A852090D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADE8C43E-58B3-4FD9-9F70-D74A852090D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADE8C43E-58B3-4FD9-9F70-D74A852090D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{BC7B28D8-9D31-4940-9690-8F30E03A6A7F} = {ECFDD009-428F-4494-98C2-045F23D24735}
 		{E60E4E7C-F9D4-41D5-801C-458A86E7E73C} = {0BBBC13A-5952-44BD-AFB0-D03003FCBF27}
 		{A68DAB27-57A4-46C6-8670-13F1957E9290} = {0BBBC13A-5952-44BD-AFB0-D03003FCBF27}
+		{ADE8C43E-58B3-4FD9-9F70-D74A852090D3} = {826A3B79-167A-498F-B7BB-B1D64E728410}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3BD8378F-EE27-4A4C-9BF1-6D4079B9431A}
