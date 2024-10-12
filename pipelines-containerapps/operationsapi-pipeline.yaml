@@ -19,11 +19,6 @@ variables:
   tag: '$(Build.BuildId)'
   imagePullSecret: 'transportacr1345436e-auth'
   vmImageName: 'ubuntu-latest'
-  ado-env: 'transport-microservices-env-prod'
-  azureServiceConnection: ''
-  aca-name: 'operationsapi-container-app'
-  aca-rg: 'transport-microservices-rg'
-  aca-repo: ''
 
 stages:
 - stage: Build
@@ -46,21 +41,18 @@ stages:
           $(tag)
 
 - stage: Deploy
-  displayName: Deploy ACA 
-  dependsOn: Build
+  displayName: Deploy stage
   jobs:
-  - deployment: ACADeploy
-    displayName: Deploy Azure Container App
-    environment: $(ado-env)
-    strategy: 
-      runOnce:
-          deploy:
-            steps:
-            - task: AzureCLI@2
-              displayName: Updating ACA image 
-              inputs:
-                azureSubscription: $(azureServiceConnection)
-                scriptType: 'pscore'
-                scriptLocation: 'inlineScript'
-                inlineScript: |
-                    az containerapp update -n $(aca-name) -g $(aca-rg) --image $(aca-acr)/$(aca-repo):$(Build.BuildId)
+  - job: Deploy
+    displayName: Deploy
+    steps:
+    - task: AzureContainerApps@1
+      inputs:
+        azureSubscription: 'Azure subscription 1(ac6df0a6-4361-4fcc-b232-1c938d623a03)'
+        imageToDeploy: 'transportacr.azurecr.io/operationsapi:latest'
+        containerAppName: 'operationsapi-container-app'
+        resourceGroup: 'transport-microservices-rg'
+        containerAppEnvironment: 'transport-microservices-env-prod'
+        targetPort: '8080'
+        location: 'uksouth'
+        ingress: 'external'
