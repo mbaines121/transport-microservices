@@ -1,0 +1,12 @@
+az acr create --name transportacr --resource-group transport-microservices-rg --sku basic
+
+az containerapp env create --name transport-microservices-env-prod --resource-group transport-microservices-rg --location uksouth
+
+# TODO: Set production environment variables
+
+az containerapp create --name operationsapi-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress internal --target-port 8080
+az containerapp create --name suppliersapi-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress internal --target-port 8080
+az containerapp create --name yarpapigateway-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress internal --target-port 8080
+
+# TODO: Create a UI app, only this should be external 
+az containerapp create --name webapp-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress external --target-port 8080
