@@ -9,4 +9,4 @@ az containerapp create --name suppliersapi-container-app --environment transport
 az containerapp create --name yarpapigateway-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress internal --target-port 8080
 
 # TODO: Create a UI app, only this should be external 
-az containerapp create --name webapp-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress external --target-port 8080
+az containerapp create --name transportwebui-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress external --target-port 8080

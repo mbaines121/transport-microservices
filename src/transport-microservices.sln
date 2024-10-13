@@ -41,6 +41,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{6E59A115
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarpApiGateway", "ApiGateway\YarpApiGateway\YarpApiGateway.csproj", "{ADE8C43E-58B3-4FD9-9F70-D74A852090D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransportWebUI", "WebUI\TransportWebUI\TransportWebUI.csproj", "{FF8BD661-A23B-4D80-874F-F5ED61FCE21F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{ADE8C43E-58B3-4FD9-9F70-D74A852090D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADE8C43E-58B3-4FD9-9F70-D74A852090D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADE8C43E-58B3-4FD9-9F70-D74A852090D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF8BD661-A23B-4D80-874F-F5ED61FCE21F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF8BD661-A23B-4D80-874F-F5ED61FCE21F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF8BD661-A23B-4D80-874F-F5ED61FCE21F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF8BD661-A23B-4D80-874F-F5ED61FCE21F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +89,7 @@ Global
 		{E60E4E7C-F9D4-41D5-801C-458A86E7E73C} = {0BBBC13A-5952-44BD-AFB0-D03003FCBF27}
 		{A68DAB27-57A4-46C6-8670-13F1957E9290} = {0BBBC13A-5952-44BD-AFB0-D03003FCBF27}
 		{ADE8C43E-58B3-4FD9-9F70-D74A852090D3} = {826A3B79-167A-498F-B7BB-B1D64E728410}
+		{FF8BD661-A23B-4D80-874F-F5ED61FCE21F} = {6E59A115-54A7-44D4-9222-C48681D6BD73}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3BD8378F-EE27-4A4C-9BF1-6D4079B9431A}

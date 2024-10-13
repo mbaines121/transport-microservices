@@ -11,6 +11,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Jobs\DeleteJob\**" />
+    <Compile Remove="Jobs\GetJob\**" />
+    <Compile Remove="Jobs\UpdateJob\**" />
+    <Content Remove="Jobs\DeleteJob\**" />
+    <Content Remove="Jobs\GetJob\**" />
+    <Content Remove="Jobs\UpdateJob\**" />
+    <EmbeddedResource Remove="Jobs\DeleteJob\**" />
+    <EmbeddedResource Remove="Jobs\GetJob\**" />
+    <EmbeddedResource Remove="Jobs\UpdateJob\**" />
+    <None Remove="Jobs\DeleteJob\**" />
+    <None Remove="Jobs\GetJob\**" />
+    <None Remove="Jobs\UpdateJob\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="8.0.2" />
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.1" />
     <PackageReference Include="Carter" Version="8.2.1" />
@@ -18,12 +33,6 @@
     <PackageReference Include="Microsoft.Azure.AppConfiguration.AspNetCore" Version="7.3.0" />
     <PackageReference Include="Microsoft.Extensions.Azure" Version="1.7.5" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Jobs\DeleteJob\" />
-    <Folder Include="Jobs\GetJob\" />
-    <Folder Include="Jobs\UpdateJob\" />
   </ItemGroup>
 
   <ItemGroup>
