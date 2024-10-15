@@ -43,7 +43,7 @@ stages:
   jobs:
   - job: Deploy
     displayName: Deploy
-    encironment: 'staging'
+    environment: 'staging'
     steps:
     - task: AzureContainerApps@1
       inputs:
