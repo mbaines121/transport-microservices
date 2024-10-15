@@ -39,7 +39,7 @@ stages:
           $(tag)
 
 - stage: 'Deploy Staging'
-  displayName: Deploy staging
+  displayName: 'Deploy staging'
   jobs:
   - job: Deploy
     displayName: Deploy
@@ -57,7 +57,7 @@ stages:
         acrName: 'transportacr'
 
 - stage: 'Deploy Production'
-  displayName: Deploy production
+  displayName: 'Deploy production'
   jobs:
   - job: Deploy
     displayName: Deploy
