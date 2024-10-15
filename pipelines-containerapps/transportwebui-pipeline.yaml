@@ -38,29 +38,14 @@ stages:
         tags: |
           $(tag)
 
-- stage: 'DeployStaging'
-  displayName: 'Deploystaging'
+- stage: 'Staging'
+  displayName: 'Deploy to staging'
+  dependsOn: Build
   jobs:
-  - job: Deploy
-    displayName: Deploy
-    steps:
-    - task: AzureContainerApps@1
-      inputs:
-        azureSubscription: 'Azure subscription 1(ac6df0a6-4361-4fcc-b232-1c938d623a03)'
-        imageToDeploy: 'transportacr.azurecr.io/transportwebui:$(Build.BuildId)'
-        containerAppName: 'transportwebui-container-app'
-        resourceGroup: 'transport-microservices-rg'
-        containerAppEnvironment: 'transport-microservices-env-prod'
-        targetPort: '8080'
-        location: 'uksouth'
-        ingress: 'external'
-        acrName: 'transportacr'
-
-- stage: 'DeployProduction'
-  displayName: 'Deployproduction'
-  jobs:
-  - job: Deploy
-    displayName: Deploy
+  - deployment: Deploy
+    pool:
+      vmImage: $(vmImageName)
+    environment: staging
     steps:
     - task: AzureContainerApps@1
       inputs:
