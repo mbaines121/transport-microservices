@@ -61,3 +61,27 @@ stages:
               location: 'uksouth'
               ingress: 'external'
               acrName: 'transportacr'
+
+- stage: 'Production'
+  displayName: 'Deploy to production'
+  dependsOn: Build
+  jobs:
+  - deployment: Deploy
+    pool:
+      vmImage: $(vmImageName)
+    environment: production
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureContainerApps@1
+            inputs:
+              azureSubscription: 'Azure subscription 1(ac6df0a6-4361-4fcc-b232-1c938d623a03)'
+              imageToDeploy: 'transportacr.azurecr.io/transportwebui:$(Build.BuildId)'
+              containerAppName: 'transportwebui-container-app'
+              resourceGroup: 'transport-microservices-rg'
+              containerAppEnvironment: 'transport-microservices-env-prod'
+              targetPort: '8080'
+              location: 'uksouth'
+              ingress: 'external'
+              acrName: 'transportacr'
