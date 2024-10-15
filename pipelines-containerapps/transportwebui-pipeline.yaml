@@ -38,8 +38,8 @@ stages:
         tags: |
           $(tag)
 
-- stage: 'Deploy Staging'
-  displayName: 'Deploy staging'
+- stage: 'DeployStaging'
+  displayName: 'Deploystaging'
   jobs:
   - job: Deploy
     displayName: Deploy
@@ -56,8 +56,8 @@ stages:
         ingress: 'external'
         acrName: 'transportacr'
 
-- stage: 'Deploy Production'
-  displayName: 'Deploy production'
+- stage: 'DeployProduction'
+  displayName: 'Deployproduction'
   jobs:
   - job: Deploy
     displayName: Deploy
