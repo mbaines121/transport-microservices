@@ -1,0 +1,63 @@
+﻿@page "/weather"
+@using RestSharp
+@using RestSharp.Authenticators
+@attribute [StreamRendering]
+
+<PageTitle>Jobs</PageTitle>
+
+<h1>Jobs</h1>
+
+<p>This component demonstrates accessing a service through the API Gateway.</p>
+
+@if (_jobs == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Customer</th>
+                <th>Shipper</th>
+                <th>Supplier</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var job in _jobs)
+            {
+                <tr>
+                    <td>@job.JobNumber</td>
+                    <td>@job.CustomerName</td>
+                    <td>@job.ShipperName</td>
+                    <td>@job.SupplierName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@inject IConfiguration _configuration;
+
+@code {
+    private Job[]? _jobs;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var baseUrl = _configuration["ApiGatewayUrl"] ?? "";
+
+        HttpClient client = new();
+        var result = await client.GetAsync(baseUrl + "/operations-service");
+        var text = await result.Content.ReadAsStringAsync();
+
+    }
+
+    private class Job
+    {
+        public string JobNumber { get; set; } = default!;
+        public string CustomerName { get; set; } = default!;
+        public string ShipperName { get; set; } = default!;
+        public string SupplierName { get; set; } = default!;
+    }
+}
