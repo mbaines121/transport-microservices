@@ -64,7 +64,7 @@ stages:
 
 - stage: 'Production'
   displayName: 'Deploy to production'
-  dependsOn: Build
+  dependsOn: Staging
   jobs:
   - deployment: Deploy
     pool:
