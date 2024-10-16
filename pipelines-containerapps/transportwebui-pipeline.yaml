@@ -38,7 +38,7 @@ stages:
         tags: |
           $(tag)
 
-- template: src/pipelines-containerapps/templates/deploy-aca.yaml
+- template: templates/deploy-aca.yaml
   parameters:
     stage: Staging
     displayName: 'Deploy to staging'
@@ -47,7 +47,7 @@ stages:
     ingress: external
     dependsOn: Build
 
-- template: src/pipelines-containerapps/templates/deploy-aca.yaml
+- template: templates/deploy-aca.yaml
   parameters:
     stage: Production
     displayName: 'Deploy to production'
