@@ -15,7 +15,7 @@ parameters:
   default: Build
 
 stages:
-- stage: ${{ stage }}
+- stage: ${{ parameters.stage }}
   displayName: ${{ displayName }}
   dependsOn: ${{ dependsOn }}
   jobs:
