@@ -1,16 +1,16 @@
 parameters:
-- name: stage
+- name: 'stage'
   type: string
-- name: displayName
+- name: 'displayName'
   type: string
-- name: environment
+- name: 'environment'
   type: string
-- name: microserviceName
+- name: 'microserviceName'
   type: string
-- name: ingress
+- name: 'ingress'
   type: string
   default: 'internal'
-- name: dependsOn
+- name: 'dependsOn'
   type: string
   default: Build
 
