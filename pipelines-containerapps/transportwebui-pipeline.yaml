@@ -40,21 +40,21 @@ stages:
 
 - template: templates/deploy-aca.yaml
   parameters:
-    stage: Staging
+    stage: 'Staging'
     displayName: 'Deploy to staging'
-    environment: staging
-    microserviceName: transportwebui
-    ingress: external
-    dependsOn: Build
+    environment: 'staging'
+    microserviceName: 'transportwebui'
+    ingress: 'external'
+    dependsOn: 'Build'
 
 - template: templates/deploy-aca.yaml
   parameters:
-    stage: Production
+    stage: 'Production'
     displayName: 'Deploy to production'
-    environment: production
-    microserviceName: transportwebui
-    ingress: external
-    dependsOn: Staging
+    environment: 'production'
+    microserviceName: 'transportwebui'
+    ingress: 'external'
+    dependsOn: 'Staging'
 
 #stages:
 #- stage: 'Staging'

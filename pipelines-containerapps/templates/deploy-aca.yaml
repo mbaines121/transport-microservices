@@ -1,22 +1,28 @@
 parameters:
 - name: stage
+  type: string
 - name: displayName
+  type: string
 - name: environment
+  type: string
 - name: microserviceName
+  type: string
 - name: ingress
+  type: string
   default: 'internal'
 - name: dependsOn
+  type: string
   default: Build
 
 stages:
-- stage: ${{stage}}
-  displayName: ${{displayName}}
-  dependsOn: ${{dependsOn}}
+- stage: ${{ stage }}
+  displayName: ${{ displayName }}
+  dependsOn: ${{ dependsOn }}
   jobs:
   - deployment: Deploy
     pool:
       vmImage: $(vmImageName)
-    environment: ${{environment}}
+    environment: ${{ environment }}
     strategy:
       runOnce:
         deploy:
@@ -24,11 +30,11 @@ stages:
           - task: AzureContainerApps@1
             inputs:
               azureSubscription: 'Azure subscription 1(ac6df0a6-4361-4fcc-b232-1c938d623a03)'
-              imageToDeploy: 'transportacr.azurecr.io/${{microserviceName}}:$(Build.BuildId)'
-              containerAppName: '${{microserviceName}}-container-app'
+              imageToDeploy: 'transportacr.azurecr.io/${{ microserviceName }}:$(Build.BuildId)'
+              containerAppName: '${{ microserviceName }}-container-app'
               resourceGroup: 'transport-microservices-rg'
               containerAppEnvironment: 'transport-microservices-env-prod' # TODO: This shouldn't have the prod environment in its name.
               targetPort: '8080'
               location: 'uksouth'
-              ingress: ${{ingress}}
+              ingress: ${{ ingress }}
               acrName: 'transportacr'
