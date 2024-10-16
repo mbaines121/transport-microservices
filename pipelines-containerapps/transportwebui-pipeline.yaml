@@ -38,50 +38,69 @@ stages:
         tags: |
           $(tag)
 
-- stage: 'Staging'
-  displayName: 'Deploy to staging'
-  dependsOn: Build
-  jobs:
-  - deployment: Deploy
-    pool:
-      vmImage: $(vmImageName)
+- template: templates/deploy-aca.yaml
+  parameters:
+    stage: Staging
+    displayName: 'Deploy to staging'
     environment: staging
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureContainerApps@1
-            inputs:
-              azureSubscription: 'Azure subscription 1(ac6df0a6-4361-4fcc-b232-1c938d623a03)'
-              imageToDeploy: 'transportacr.azurecr.io/transportwebui:$(Build.BuildId)'
-              containerAppName: 'transportwebui-container-app'
-              resourceGroup: 'transport-microservices-rg'
-              containerAppEnvironment: 'transport-microservices-env-prod'
-              targetPort: '8080'
-              location: 'uksouth'
-              ingress: 'external'
-              acrName: 'transportacr'
+    microserviceName: transportwebui
+    ingress: external
+    dependsOn: Build
 
-- stage: 'Production'
-  displayName: 'Deploy to production'
-  dependsOn: Staging
-  jobs:
-  - deployment: Deploy
-    pool:
-      vmImage: $(vmImageName)
+- template: templates/deploy-aca.yaml
+  parameters:
+    stage: Production
+    displayName: 'Deploy to production'
     environment: production
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureContainerApps@1
-            inputs:
-              azureSubscription: 'Azure subscription 1(ac6df0a6-4361-4fcc-b232-1c938d623a03)'
-              imageToDeploy: 'transportacr.azurecr.io/transportwebui:$(Build.BuildId)'
-              containerAppName: 'transportwebui-container-app'
-              resourceGroup: 'transport-microservices-rg'
-              containerAppEnvironment: 'transport-microservices-env-prod'
-              targetPort: '8080'
-              location: 'uksouth'
-              ingress: 'external'
-              acrName: 'transportacr'
+    microserviceName: transportwebui
+    ingress: external
+    dependsOn: Staging
+
+#stages:
+#- stage: 'Staging'
+#  displayName: 'Deploy to staging'
+#  dependsOn: Build
+#  jobs:
+#  - deployment: Deploy
+#    pool:
+#      vmImage: $(vmImageName)
+#    environment: staging
+#    strategy:
+#      runOnce:
+#        deploy:
+#          steps:
+#          - task: AzureContainerApps@1
+#            inputs:
+#              azureSubscription: 'Azure subscription 1(ac6df0a6-4361-4fcc-b232-1c938d623a03)'
+#              imageToDeploy: 'transportacr.azurecr.io/transportwebui:$(Build.BuildId)'
+#              containerAppName: 'transportwebui-container-app'
+#              resourceGroup: 'transport-microservices-rg'
+#              containerAppEnvironment: 'transport-microservices-env-prod'
+#              targetPort: '8080'
+#              location: 'uksouth'
+#              ingress: 'external'
+#              acrName: 'transportacr'
+
+#- stage: 'Production'
+#  displayName: 'Deploy to production'
+#  dependsOn: Staging
+#  jobs:
+#  - deployment: Deploy
+#    pool:
+#      vmImage: $(vmImageName)
+#    environment: production
+#    strategy:
+#      runOnce:
+#        deploy:
+#          steps:
+#          - task: AzureContainerApps@1
+#            inputs:
+#              azureSubscription: 'Azure subscription 1(ac6df0a6-4361-4fcc-b232-1c938d623a03)'
+#              imageToDeploy: 'transportacr.azurecr.io/transportwebui:$(Build.BuildId)'
+#              containerAppName: 'transportwebui-container-app'
+#              resourceGroup: 'transport-microservices-rg'
+#              containerAppEnvironment: 'transport-microservices-env-prod'
+#              targetPort: '8080'
+#              location: 'uksouth'
+#              ingress: 'external'
+#              acrName: 'transportacr'
