@@ -38,20 +38,18 @@ stages:
         tags: |
           $(tag)
 
-- stage: Deploy
-  displayName: Deploy stage
-  jobs:
-  - job: Deploy
-    displayName: Deploy
-    steps:
-    - task: AzureContainerApps@1
-      inputs:
-        azureSubscription: 'Azure subscription 1(ac6df0a6-4361-4fcc-b232-1c938d623a03)'
-        imageToDeploy: 'transportacr.azurecr.io/suppliersapi:$(Build.BuildId)'
-        containerAppName: 'suppliersapi-container-app'
-        resourceGroup: 'transport-microservices-rg'
-        containerAppEnvironment: 'transport-microservices-env-prod'
-        targetPort: '8080'
-        location: 'uksouth'
-        ingress: 'internal'
-        acrName: 'transportacr'
+- template: templates/deploy-aca.yaml
+  parameters:
+    stage: 'Staging'
+    displayName: 'Deploy to staging'
+    environment: 'staging'
+    microserviceName: 'suppliersapi'
+    dependsOn: 'Build'
+
+- template: templates/deploy-aca.yaml
+  parameters:
+    stage: 'Production'
+    displayName: 'Deploy to production'
+    environment: 'production'
+    microserviceName: 'suppliersapi'
+    dependsOn: 'Staging'
