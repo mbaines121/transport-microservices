@@ -21,6 +21,8 @@ services:
     restart: always
     ports:
       - "1433:1433"
+    volumes:
+      - mssql_suppliers:/var/lib/mssql/data/
 
   operations.api:
     image: ${DOCKER_REGISTRY-}operationsapi
@@ -31,8 +33,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
-      - ConnectionStrings__LocalDatabase=Server=operationsdb;Port=5432;Database=OperationsDb;User Id=postgres;Password=postgres;Include Error Detail=true
-      - ConnectionStrings__AzureDatabase=Server=operationsdb;Port=5432;Database=OperationsDb;User Id=postgres;Password=postgres;Include Error Detail=true
+      - ConnectionStrings__Database=Server=operationsdb;Port=5432;Database=OperationsDb;User Id=postgres;Password=postgres;Include Error Detail=true
     depends_on:
       - operationsdb
     ports:
@@ -86,7 +87,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
-      - ApiGatewayUrl=https://localhost:6164
+      - ApiGatewayUrl=http://yarpapigateway:8080
     depends_on:
       - yarpapigateway
     ports:
@@ -98,5 +99,6 @@ services:
 
 volumes:
   postgres_operations:
+  mssql_suppliers:
 
 

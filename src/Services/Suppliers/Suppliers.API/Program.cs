@@ -1,4 +1,3 @@
-using Carter;
 using HealthChecks.UI.Client;
 using Suppliers.API;
 

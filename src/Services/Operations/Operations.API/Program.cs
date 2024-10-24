@@ -4,12 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var assembly = typeof(Program).Assembly;
 
-var databaseConnectionString = builder.Configuration.GetConnectionString("LocalDatabase");
-
-if (!builder.Environment.IsDevelopment())
-{
-    databaseConnectionString = builder.Configuration.GetConnectionString("AzureDatabase");
-}
+var databaseConnectionString = builder.Configuration.GetConnectionString("Database");
 
 builder.Services.AddCarter();
 builder.Services.AddMediatR(config =>

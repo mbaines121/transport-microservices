@@ -47,10 +47,16 @@ else
     {
         var baseUrl = _configuration["ApiGatewayUrl"] ?? "";
 
+        var url = baseUrl + "/operations-service";
+
         HttpClient client = new();
-        var result = await client.GetAsync(baseUrl + "/operations-service");
+        var result = await client.GetAsync(url);
         var text = await result.Content.ReadAsStringAsync();
 
+        _jobs = new List<Job>
+        {
+            new Job{ CustomerName = text }
+        }.ToArray();
     }
 
     private class Job
