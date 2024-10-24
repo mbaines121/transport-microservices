@@ -12,6 +12,16 @@ services:
     volumes:
       - postgres_operations:/var/lib/postgresql/data/
 
+  suppliersdb:
+    image: mcr.microsoft.com/mssql/server
+    container_name: suppliersdb
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=SwN12345678
+    restart: always
+    ports:
+      - "1433:1433"
+
   operations.api:
     image: ${DOCKER_REGISTRY-}operationsapi
     build:

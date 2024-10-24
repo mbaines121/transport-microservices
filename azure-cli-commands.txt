@@ -1,15 +1,10 @@
+az group create -- location uksouth --name transport-microservices-rg
+
 az acr create --name transportacr --resource-group transport-microservices-rg --sku basic
 
 az containerapp env create --name transport-microservices-env-prod --resource-group transport-microservices-rg --location uksouth
-
-# TODO: Set production environment variables
 
 az containerapp create --name operationsapi-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress internal --target-port 8080 --env-vars ASPNETCORE_ENVIRONMENT="Production"
 az containerapp create --name suppliersapi-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress internal --target-port 8080 --env-vars ASPNETCORE_ENVIRONMENT="Production"
 az containerapp create --name yarpapigateway-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress internal --target-port 8080 --env-vars ASPNETCORE_ENVIRONMENT="Production"
 az containerapp create --name transportwebui-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress external --target-port 8080 --env-vars ASPNETCORE_ENVIRONMENT="Production"
-
-az containerapp update --name operationsapi-container-app --resource-group transport-microservices-rg --set-env-vars ASPNETCORE_ENVIRONMENT="Production"
-az containerapp update --name suppliersapi-container-app --resource-group transport-microservices-rg --set-env-vars ASPNETCORE_ENVIRONMENT="Production"
-az containerapp update --name yarpapigateway-container-app --resource-group transport-microservices-rg --set-env-vars ASPNETCORE_ENVIRONMENT="Production"
-az containerapp update --name transportwebui-container-app --resource-group transport-microservices-rg --set-env-vars ASPNETCORE_ENVIRONMENT="Production"
