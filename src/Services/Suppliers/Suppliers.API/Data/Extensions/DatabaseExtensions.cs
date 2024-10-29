@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Suppliers.API.Data.Extensions;
+﻿namespace Suppliers.API.Data.Extensions;
 
 public static class DatabaseExtensions
 {

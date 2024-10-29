@@ -11,18 +11,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Jobs\DeleteJob\**" />
-    <Compile Remove="Jobs\GetJob\**" />
-    <Compile Remove="Jobs\UpdateJob\**" />
-    <Content Remove="Jobs\DeleteJob\**" />
-    <Content Remove="Jobs\GetJob\**" />
-    <Content Remove="Jobs\UpdateJob\**" />
-    <EmbeddedResource Remove="Jobs\DeleteJob\**" />
-    <EmbeddedResource Remove="Jobs\GetJob\**" />
-    <EmbeddedResource Remove="Jobs\UpdateJob\**" />
-    <None Remove="Jobs\DeleteJob\**" />
-    <None Remove="Jobs\GetJob\**" />
-    <None Remove="Jobs\UpdateJob\**" />
+    <Compile Remove="SubDomains\Jobs\DeleteJob\**" />
+    <Compile Remove="SubDomains\Jobs\GetJob\**" />
+    <Compile Remove="SubDomains\Jobs\UpdateJob\**" />
+    <Content Remove="SubDomains\Jobs\DeleteJob\**" />
+    <Content Remove="SubDomains\Jobs\GetJob\**" />
+    <Content Remove="SubDomains\Jobs\UpdateJob\**" />
+    <EmbeddedResource Remove="SubDomains\Jobs\DeleteJob\**" />
+    <EmbeddedResource Remove="SubDomains\Jobs\GetJob\**" />
+    <EmbeddedResource Remove="SubDomains\Jobs\UpdateJob\**" />
+    <None Remove="SubDomains\Jobs\DeleteJob\**" />
+    <None Remove="SubDomains\Jobs\GetJob\**" />
+    <None Remove="SubDomains\Jobs\UpdateJob\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +41,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SubDomains\Companies\CreateCompany\" />
+    <Folder Include="SubDomains\Companies\EditCompany\" />
+    <Folder Include="SubDomains\Companies\DeleteCompany\" />
+    <Folder Include="SubDomains\Vessels\CreateVessel\" />
+    <Folder Include="SubDomains\Vessels\DeleteVessel\" />
+    <Folder Include="SubDomains\Vessels\RenameVessel\" />
   </ItemGroup>
 
 </Project>

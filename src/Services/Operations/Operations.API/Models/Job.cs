@@ -6,7 +6,7 @@ public class Job
     public Guid CustomerId { get; set; }
     public Guid ShipperId { get; set; }
     public Guid SupplierId { get; set; }
-    public string JobNumber { get; set; }
-    public List<Load> Loads { get; set; }
-    public List<Transport> Transports { get; set; }
+    public string JobNumber { get; set; } = default!;
+    public List<Load> Loads { get; set; } = new List<Load>();
+    public List<Transport> Transports { get; set; } = new List<Transport>();
 }

@@ -18,9 +18,16 @@ builder.Services.AddMarten(config =>
 {
     config.Connection(databaseConnectionString!);
     config.Schema.For<Job>().Identity(m => m.JobId);
+    config.Schema.For<Company>().Identity(m => m.CompanyId);
 }).UseLightweightSessions();
 
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.InitializeMartenWith<CompaniesInitialData>();
+}
+
 builder.Services.AddScoped<IJobRepository, JobRepository>();
+builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 builder.Services.AddValidatorsFromAssembly(assembly);

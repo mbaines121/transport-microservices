@@ -7,7 +7,7 @@
     <ProjectGuid>b316065a-53a8-431e-8010-10d87fe4920a</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
-    <DockerServiceName>operations.api</DockerServiceName>
+    <DockerServiceName>transportwebui</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.yml" />

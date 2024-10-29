@@ -1,4 +1,4 @@
-﻿namespace Operations.API.Jobs.CreateJob;
+﻿namespace Operations.API.SubDomains.Jobs.CreateJob;
 
 public record CreateJobRequest(Job Job);
 

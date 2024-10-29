@@ -1,0 +1,49 @@
+﻿@page "/companies"
+@attribute [StreamRendering]
+
+<PageTitle>Companies</PageTitle>
+
+<h1>Companies</h1>
+
+<p>This component is responsible for being the source of truth for Companies.</p>
+
+@if (_companies == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var company in _companies)
+            {
+                <tr>
+                    <td>@company.CompanyId</td>
+                    <td>@company.Name</td>
+                    <td>@company.Code</td>
+                    <td>@company.Address</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@inject IConfiguration _configuration;
+@inject ICompanyService _companyService;
+
+@code {
+    private IEnumerable<Company>? _companies;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _companies = await _companyService.GetCompaniesAsync();
+    }
+}

@@ -1,0 +1,3 @@
+﻿# This service will also manage the companies.
+# Integration events will broadcast the company information to other services.
+# But this service will be the source of truth for companies.

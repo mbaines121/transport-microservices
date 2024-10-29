@@ -2,7 +2,7 @@
 
 namespace Suppliers.API.Endpoints;
 
-public class Endpoint : ICarterModule
+public class ConnectionEndpoints : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {

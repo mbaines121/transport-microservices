@@ -1,6 +1,4 @@
-﻿@page "/weather"
-@using RestSharp
-@using RestSharp.Authenticators
+﻿@page "/jobs"
 @attribute [StreamRendering]
 
 <PageTitle>Jobs</PageTitle>
@@ -57,13 +55,5 @@ else
         {
             new Job{ CustomerName = text, JobNumber = url }
         }.ToArray();
-    }
-
-    private class Job
-    {
-        public string JobNumber { get; set; } = default!;
-        public string CustomerName { get; set; } = default!;
-        public string ShipperName { get; set; } = default!;
-        public string SupplierName { get; set; } = default!;
     }
 }

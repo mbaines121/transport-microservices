@@ -6,5 +6,5 @@ az containerapp env create --name transport-microservices-env-prod --resource-gr
 
 az containerapp create --name operationsapi-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress internal --target-port 8080 --env-vars ASPNETCORE_ENVIRONMENT="Production"
 az containerapp create --name suppliersapi-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress internal --target-port 8080 --env-vars ASPNETCORE_ENVIRONMENT="Production"
-az containerapp create --name yarpapigateway-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress internal --target-port 8080 --env-vars ASPNETCORE_ENVIRONMENT="Production"
+az containerapp create --name yarpapigateway-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress external --target-port 8080 --env-vars ASPNETCORE_ENVIRONMENT="Production"
 az containerapp create --name transportwebui-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress external --target-port 8080 --env-vars ASPNETCORE_ENVIRONMENT="Production"

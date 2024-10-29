@@ -1,9 +1,13 @@
+using TransportWebUI;
 using TransportWebUI.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddRazorComponents();
+
+builder.Services.AddServices();
+
+builder.Services.AddHttpClient("ApiGateway", m => m.BaseAddress = new Uri(builder.Configuration["ApiGatewayUrl"]!));
 
 var app = builder.Build();
 

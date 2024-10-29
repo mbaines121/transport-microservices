@@ -39,9 +39,9 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{6E59A115-54A7-44D4-9222-C48681D6BD73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarpApiGateway", "ApiGateway\YarpApiGateway\YarpApiGateway.csproj", "{ADE8C43E-58B3-4FD9-9F70-D74A852090D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YarpApiGateway", "ApiGateway\YarpApiGateway\YarpApiGateway.csproj", "{ADE8C43E-58B3-4FD9-9F70-D74A852090D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransportWebUI", "WebUI\TransportWebUI\TransportWebUI.csproj", "{FF8BD661-A23B-4D80-874F-F5ED61FCE21F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransportWebUI", "WebUI\TransportWebUI\TransportWebUI.csproj", "{FF8BD661-A23B-4D80-874F-F5ED61FCE21F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

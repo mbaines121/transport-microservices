@@ -1,4 +1,5 @@
 ﻿using Suppliers.API.Data;
+using Suppliers.API.SubDomains.Bookings;
 
 namespace Suppliers.API;
 
@@ -15,6 +16,13 @@ public static class DependencyInjection
         });
 
         services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+
+        return services;
+    }
+
+    public static IServiceCollection AddServices(this IServiceCollection services)
+    {
+        services.AddScoped<IBookingsService, BookingsService>();
 
         return services;
     }

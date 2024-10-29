@@ -1,4 +1,4 @@
-﻿namespace Suppliers.API.Models;
+﻿namespace TransportWebUI.ViewModels;
 
 public class Booking
 {

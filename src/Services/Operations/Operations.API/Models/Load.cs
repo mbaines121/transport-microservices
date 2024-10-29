@@ -2,6 +2,6 @@
 
 public class Load
 {
-    public string ContainerCount { get; set; }
-    public string ContainerType { get; set; }
+    public string ContainerCount { get; set; } = default!;
+    public string ContainerType { get; set; } = default!;
 }

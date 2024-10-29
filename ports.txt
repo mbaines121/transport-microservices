@@ -1,0 +1,9 @@
+port numbers
+
+[http] - [https]
+
+						local env			docker env			docker inside
+1 operations api		5101 - 5151			6101 - 6161			8080 - 8081
+2 suppliers api			5102 - 5152			6102 - 6162			8080 - 8081
+4 yarpapigateway		5104 - 5154			6104 - 6164			8080 - 8081
+5 webui					5105 - 5155			6105 - 6165			8080 - 8081
