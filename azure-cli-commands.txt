@@ -8,3 +8,6 @@ az containerapp create --name operationsapi-container-app --environment transpor
 az containerapp create --name suppliersapi-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress internal --target-port 8080 --env-vars ASPNETCORE_ENVIRONMENT="Production"
 az containerapp create --name yarpapigateway-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress external --target-port 8080 --env-vars ASPNETCORE_ENVIRONMENT="Production"
 az containerapp create --name transportwebui-container-app --environment transport-microservices-env-prod --resource-group transport-microservices-rg --ingress external --target-port 8080 --env-vars ASPNETCORE_ENVIRONMENT="Production"
+
+az sql server create --name transport-sql-server --resource-group transport-microservices-rg --location uksouth --admin-user transport-admin --admin-password SwN12345678
+az sql db create --name suppliers-db --resource-group transport-microservices-rg --server transport-sql-server --compute-model serverless --edition GeneralPurpose --family Gen5 --capacity 2 --zone-redundant false --auto-pause-delay 60
