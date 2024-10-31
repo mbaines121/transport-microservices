@@ -1,4 +1,5 @@
-﻿using Suppliers.API.Data;
+﻿using Microsoft.Data.SqlClient;
+using Suppliers.API.Data;
 using Suppliers.API.SubDomains.Bookings;
 
 namespace Suppliers.API;
@@ -9,12 +10,16 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("Database");
 
-        // TODO: Get the token credential?
-
         services.AddDbContext<ApplicationDbContext>((serviceProvider, options) =>
         {
-            //options.AddInterceptors(serviceProvider.GetServices<ISaveChangesInterceptor>());
-            options.UseSqlServer(connectionString);
+            if (!environment.IsDevelopment())
+            {
+                SqlAuthenticationProvider.SetProvider(SqlAuthenticationMethod.ActiveDirectoryManagedIdentity, new CustomSqlAuthProvider());
+            }
+
+            var sqlConnection = new SqlConnection(connectionString);
+
+            options.UseSqlServer(sqlConnection);
         });
 
         services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
