@@ -9,6 +9,8 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("Database");
 
+        // TODO: Get the token credential?
+
         services.AddDbContext<ApplicationDbContext>((serviceProvider, options) =>
         {
             //options.AddInterceptors(serviceProvider.GetServices<ISaveChangesInterceptor>());
