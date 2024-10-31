@@ -40,16 +40,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="SubDomains\Companies\CreateCompany\" />
     <Folder Include="SubDomains\Companies\EditCompany\" />
     <Folder Include="SubDomains\Companies\DeleteCompany\" />
     <Folder Include="SubDomains\Vessels\CreateVessel\" />
     <Folder Include="SubDomains\Vessels\DeleteVessel\" />
     <Folder Include="SubDomains\Vessels\RenameVessel\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Messaging\BuildingBlocks.Messaging.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj" />
   </ItemGroup>
 
 </Project>

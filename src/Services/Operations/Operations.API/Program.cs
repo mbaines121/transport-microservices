@@ -1,4 +1,5 @@
 using HealthChecks.UI.Client;
+using BuildingBlocks.Messaging.MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,8 @@ builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 builder.Services.AddValidatorsFromAssembly(assembly);
+
+builder.Services.AddMessageBroker(builder.Configuration, builder.Environment.IsDevelopment());
 
 builder.Services.AddHealthChecks()
     .AddNpgSql(databaseConnectionString!);

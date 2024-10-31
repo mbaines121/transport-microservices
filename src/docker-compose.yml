@@ -24,6 +24,18 @@ services:
     volumes:
       - mssql_suppliers:/var/lib/mssql/data/
 
+  messagebroker:
+    image: rabbitmq:management
+    container_name: messagebroker
+    hostname: transport-mq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
   operations.api:
     image: ${DOCKER_REGISTRY-}operationsapi
     build:

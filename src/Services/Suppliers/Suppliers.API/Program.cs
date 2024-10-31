@@ -1,6 +1,7 @@
 using HealthChecks.UI.Client;
 using Suppliers.API;
 using Suppliers.API.Data.Extensions;
+using BuildingBlocks.Messaging.MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddServices();
 var app = builder.Build();
 
 app.MapCarter();
+
+builder.Services.AddMessageBroker(builder.Configuration, builder.Environment.IsDevelopment());
 
 app.UseHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
 {
