@@ -5,6 +5,7 @@ trigger:
   paths:
     include:
       - src/Services/Operations/Operations.API/*
+      - src/BuildingBlocks/*
 
 resources:
 - repo: self
