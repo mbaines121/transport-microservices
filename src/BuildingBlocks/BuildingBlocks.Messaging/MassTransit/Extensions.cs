@@ -38,21 +38,11 @@ public static class Extensions
             }
             else
             {
-                // TODO: First request a token credential from https://servicebus.azure.net.
-
-                //TokenCredential credential = new ClientSecretCredential("<tenant_id>", "<client_id>", "<client_secret>");
-                //var client = new ServiceBusClient("<fully_qualified_namespace>", credential);
-
                 config.UsingAzureServiceBus((context, configurator) =>
                 {
-                    // Then pass the token credential in.
                     configurator.Host(configuration["MessageBroker:Host"], host =>
                     {
-                        host.TokenCredential = new DefaultAzureCredential(
-                            new DefaultAzureCredentialOptions
-                            {
-                                ManagedIdentityClientId = configuration["MessageBroker:ClientId"]
-                            });
+                        host.TokenCredential = new ManagedIdentityCredential(configuration["MessageBroker:ClientId"]);
                     });
 
                     configurator.ConfigureEndpoints(context);
