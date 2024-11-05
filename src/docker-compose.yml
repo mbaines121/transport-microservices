@@ -24,17 +24,16 @@ services:
     volumes:
       - mssql_suppliers:/var/lib/mssql/data/
 
-  messagebroker:
+  transportmessagebroker:
     image: rabbitmq:management
-    container_name: messagebroker
     hostname: transport-mq
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
     restart: always
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "5673:5672"
+      - "15673:15672"
 
   operations.api:
     image: ${DOCKER_REGISTRY-}operationsapi
@@ -48,6 +47,7 @@ services:
       - ConnectionStrings__Database=Server=operationsdb;Port=5432;Database=OperationsDb;User Id=postgres;Password=postgres;Include Error Detail=true
     depends_on:
       - operationsdb
+      - transportmessagebroker
     ports:
       - "6101:8080"
       - "6161:8081"
@@ -65,6 +65,9 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
       - ConnectionStrings__Database=Server=suppliersdb;Database=SuppliersDb;User Id=sa;Password=SwN12345678;Encrypt=False;TrustServerCertificate=True
+    depends_on:
+     - suppliersdb
+     - transportmessagebroker
     ports:
       - "6102:8080"
       - "6162:8081"

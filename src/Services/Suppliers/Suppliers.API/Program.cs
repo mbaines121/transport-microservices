@@ -9,12 +9,12 @@ builder.Services.AddCarter();
 builder.Services.AddHealthChecks();
 builder.Services.AddInfrastructureServices(builder.Configuration, builder.Environment);
 builder.Services.AddServices();
+//builder.Services.AddMessageBroker(builder.Configuration, builder.Environment.IsDevelopment());
 
 var app = builder.Build();
 
 app.MapCarter();
 
-builder.Services.AddMessageBroker(builder.Configuration, builder.Environment.IsDevelopment());
 
 app.UseHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
 {

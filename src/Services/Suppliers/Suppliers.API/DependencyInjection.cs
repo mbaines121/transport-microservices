@@ -17,9 +17,7 @@ public static class DependencyInjection
                 SqlAuthenticationProvider.SetProvider(SqlAuthenticationMethod.ActiveDirectoryManagedIdentity, new CustomSqlAuthProvider());
             }
 
-            var sqlConnection = new SqlConnection(connectionString);
-
-            options.UseSqlServer(sqlConnection);
+            options.UseSqlServer(connectionString);
         });
 
         services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
