@@ -40,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="SubDomains\Companies\CreateCompany\" />
+    <Folder Include="SubDomains\Companies\GetCompany\" />
     <Folder Include="SubDomains\Companies\EditCompany\" />
     <Folder Include="SubDomains\Companies\DeleteCompany\" />
     <Folder Include="SubDomains\Vessels\CreateVessel\" />
