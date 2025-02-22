@@ -1,4 +1,6 @@
-﻿namespace TransportWebUI.ViewModels;
+﻿using BuildingBlocks.Helpers;
+
+namespace TransportWebUI.Models;
 
 public class Company
 {
@@ -6,4 +8,6 @@ public class Company
     public string Name { get; set; } = default!;
     public string Code { get; set; } = default!;
     public string Address { get; set; } = default!;
+
+    public ListItem ToListItem() => new ListItem(CompanyId, Name, Code);
 }

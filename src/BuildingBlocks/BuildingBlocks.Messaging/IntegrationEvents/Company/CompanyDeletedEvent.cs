@@ -1,5 +1,5 @@
 ﻿namespace BuildingBlocks.Messaging.IntegrationEvents.Company;
 
-public class CompanyDeleted : IntegrationEvent
+public class CompanyDeletedEvent : IntegrationEvent
 {
 }

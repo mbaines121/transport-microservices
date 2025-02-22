@@ -1,4 +1,4 @@
-﻿namespace TransportWebUI.ViewModels;
+﻿namespace TransportWebUI.Models;
 
 internal class Response
 {

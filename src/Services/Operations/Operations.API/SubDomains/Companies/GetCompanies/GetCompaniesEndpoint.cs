@@ -4,7 +4,7 @@ namespace Operations.API.SubDomains.Companies.GetJobs;
 
 public record GetCompaniesResponse(IEnumerable<Company> Companies);
 
-public class GetOrders : ICarterModule
+public class GetCompanies : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {

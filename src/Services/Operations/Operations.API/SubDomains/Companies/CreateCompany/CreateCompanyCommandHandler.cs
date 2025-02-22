@@ -10,11 +10,11 @@ public class CreateCompanyCommandHandler(ICompanyRepository _companyRepository, 
 {
     public async Task<CreateCompanyResult> Handle(CreateCompanyCommand command, CancellationToken cancellationToken)
     {
-        var companyCreatedEvent = command.Company.Adapt<CompanyCreated>();
-
-        await _publishEndpoint.Publish(companyCreatedEvent);
+        var companyCreatedEvent = command.Company.Adapt<CompanyCreatedEvent>();
 
         var companyId = await _companyRepository.CreateCompanyAsync(command.Company, cancellationToken);
+
+        await _publishEndpoint.Publish(companyCreatedEvent);
 
         return new CreateCompanyResult(companyId);
     }

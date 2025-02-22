@@ -1,15 +1,20 @@
 ﻿@page "/jobs"
-@attribute [StreamRendering]
+@rendermode InteractiveServer
 
 <PageTitle>Jobs</PageTitle>
 
 <h1>Jobs</h1>
+<h3>(Operations context)</h3>
 
 <p>This component demonstrates accessing a service through the API Gateway.</p>
 
 @if (_jobs == null)
 {
     <p><em>Loading...</em></p>
+}
+else if (_jobs is not null && !_jobs.Any())
+{
+    <p><em>There are no jobs to display.</em></p>
 }
 else
 {
@@ -37,23 +42,13 @@ else
 }
 
 @inject IConfiguration _configuration;
+@inject IJobService _jobService;
 
 @code {
-    private Job[]? _jobs;
+    private IEnumerable<JobViewModel>? _jobs;
 
     protected override async Task OnInitializedAsync()
     {
-        var baseUrl = _configuration["ApiGatewayUrl"] ?? "";
-
-        var url = baseUrl + "/operations-service";
-
-        HttpClient client = new();
-        var result = await client.GetAsync(url);
-        var text = await result.Content.ReadAsStringAsync();
-
-        _jobs = new List<Job>
-        {
-            new Job{ CustomerName = text, JobNumber = url }
-        }.ToArray();
+        _jobs = await _jobService.GetJobsAsync();
     }
 }

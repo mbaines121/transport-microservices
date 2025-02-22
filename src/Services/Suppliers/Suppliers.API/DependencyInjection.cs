@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
-using Suppliers.API.Data;
 using Suppliers.API.SubDomains.Bookings;
+using Suppliers.API.SubDomains.Companies;
 
 namespace Suppliers.API;
 
@@ -28,6 +28,7 @@ public static class DependencyInjection
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddScoped<IBookingsService, BookingsService>();
+        services.AddScoped<ICompanyService, CompanyService>();
 
         return services;
     }

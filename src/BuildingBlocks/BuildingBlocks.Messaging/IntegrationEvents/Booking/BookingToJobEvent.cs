@@ -1,6 +1,6 @@
-﻿namespace TransportWebUI.ViewModels;
+﻿namespace BuildingBlocks.Messaging.IntegrationEvents.Booking;
 
-public class Booking
+public class BookingToJobEvent
 {
     public Guid BookingId { get; set; }
     public Guid CustomerId { get; set; }

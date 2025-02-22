@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Suppliers.API.Data;
 
@@ -11,9 +12,11 @@ using Suppliers.API.Data;
 namespace Suppliers.API.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241112153755_AddCompanies")]
+    partial class AddCompanies
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,28 +35,16 @@ namespace Suppliers.API.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Closed")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("ClosedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("CustomerId")
+                    b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ShipperId")
+                    b.Property<Guid>("ShipperId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("SupplierId")
+                    b.Property<Guid>("SupplierId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("BookingId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("ShipperId");
-
-                    b.HasIndex("SupplierId");
 
                     b.ToTable("Bookings");
                 });
@@ -75,27 +66,6 @@ namespace Suppliers.API.Data.Migrations
                     b.HasKey("CompanyId");
 
                     b.ToTable("Companies");
-                });
-
-            modelBuilder.Entity("Suppliers.API.Models.Booking", b =>
-                {
-                    b.HasOne("Suppliers.API.Models.Company", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId");
-
-                    b.HasOne("Suppliers.API.Models.Company", "Shipper")
-                        .WithMany()
-                        .HasForeignKey("ShipperId");
-
-                    b.HasOne("Suppliers.API.Models.Company", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId");
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Shipper");
-
-                    b.Navigation("Supplier");
                 });
 #pragma warning restore 612, 618
         }

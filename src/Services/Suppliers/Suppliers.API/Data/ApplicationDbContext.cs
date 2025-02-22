@@ -10,6 +10,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     }
 
     public DbSet<Booking> Bookings => Set<Booking>();
+    public DbSet<Company> Companies => Set<Company>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

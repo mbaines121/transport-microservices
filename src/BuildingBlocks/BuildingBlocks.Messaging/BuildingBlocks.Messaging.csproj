@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="IntegrationEvents\Booking\" />
     <Folder Include="IntegrationEvents\Job\" />
     <Folder Include="IntegrationEvents\Vessel\" />
   </ItemGroup>

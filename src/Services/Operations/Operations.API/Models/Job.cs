@@ -3,6 +3,7 @@
 public class Job
 {
     public Guid JobId { get; set; }
+    public Guid BookingId { get; set; }
     public Guid CustomerId { get; set; }
     public Guid ShipperId { get; set; }
     public Guid SupplierId { get; set; }

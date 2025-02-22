@@ -1,11 +1,12 @@
 ﻿@page "/bookings"
-@attribute [StreamRendering]
+@rendermode InteractiveServer
 
 <PageTitle>Bookings</PageTitle>
 
 <h1>Bookings</h1>
+<h3>(Suppliers context)</h3>
 
-<p>This component is responsible for being the source of truth for Bookings.</p>
+<button type="button" class="btn btn-primary" @onclick="@(() => AddBooking())">Add Booking</button>
 
 @if (_bookings == null)
 {
@@ -13,20 +14,15 @@
 }
 else
 {
-    <p>The Suppliers Service should have its own list of Companies, built from the events handled from the Operations service.
-
-        <br />
-        Use this list in a drop down when adding a new booking.
-    </p>
-
     <table class="table">
         <thead>
             <tr>
                 <th>Booking Id</th>
                 <th>Booking Reference</th>
-                <th>Customer Id</th>
-                <th>Supplier Id</th>
-                <th>Shipper Id</th>
+                <th>Customer</th>
+                <th>Supplier</th>
+                <th>Shipper</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -35,9 +31,12 @@ else
                 <tr>
                     <td>@booking.BookingId</td>
                     <td>@booking.BookingReference</td>
-                    <td>@booking.CustomerId</td>
-                    <td>@booking.SupplierId</td>
-                    <td>@booking.ShipperId</td>
+                    <td>@booking.CustomerName.Name</td>
+                    <td>@booking.SupplierName.Name</td>
+                    <td>@booking.ShipperName.Name</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" @onclick="@(() => ToJobAsync(booking))">To Job</button>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -46,12 +45,23 @@ else
 
 @inject IConfiguration _configuration;
 @inject IBookingService _bookingService;
+@inject NavigationManager _navigationManager;
 
 @code {
-    private IEnumerable<Booking>? _bookings;
+    private IEnumerable<BookingViewModel>? _bookings;
 
     protected override async Task OnInitializedAsync()
     {
         _bookings = await _bookingService.GetBookingsAsync();
+    }
+
+    public void AddBooking()
+    {
+        _navigationManager.NavigateTo("/booking/edit");
+    }
+
+    public async Task ToJobAsync(BookingViewModel bookingViewModel)
+    {
+        await _bookingService.ToJobAsync(bookingViewModel);
     }
 }

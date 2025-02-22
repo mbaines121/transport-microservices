@@ -1,0 +1,101 @@
+﻿@page "/booking/edit"
+@rendermode InteractiveServer
+
+<NavLink href="/bookings">Back</NavLink>
+
+<h3>Manage Booking</h3>
+
+<PageTitle>Manage Booking</PageTitle>
+
+<EditForm Model="_booking" OnValidSubmit="Submit">
+
+    <div class="row mb-3">
+        <div class="col-2">
+            <label class="col-form-label">Booking Reference</label>
+        </div>
+        <div class="col-2">
+            <InputText @bind-Value="_booking.BookingReference" class="form-control"></InputText>
+        </div>
+        <div class="col-2">
+            <ValidationMessage For="() => _booking.BookingReference"></ValidationMessage>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-2">
+            <label class="col-form-label">Customer</label>
+        </div>
+        <div class="col-2">
+            <InputSelect @bind-Value="_booking.CustomerName.Id" class="form-control">
+                @foreach(var item in _companies)
+                {
+                    <option value="@item.CompanyId">@item.Name (@item.Code)</option>
+                }
+            </InputSelect>
+        </div>
+        <div class="col-2">
+            <ValidationMessage For="() => _booking.CustomerName.Name"></ValidationMessage>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-2">
+            <label class="col-form-label">Supplier</label>
+        </div>
+        <div class="col-2">
+            <InputSelect @bind-Value="_booking.SupplierName.Id" class="form-control">
+                @foreach (var item in _companies)
+                {
+                    <option value="@item.CompanyId">@item.Name (@item.Code)</option>
+                }
+            </InputSelect>
+        </div>
+        <div class="col-2">
+            <ValidationMessage For="() => _booking.SupplierName.Name"></ValidationMessage>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-2">
+            <label class="col-form-label">Shipper</label>
+        </div>
+        <div class="col-2">
+            <InputSelect @bind-Value="_booking.ShipperName.Id" class="form-control">
+                @foreach (var item in _companies)
+                {
+                    <option value="@item.CompanyId">@item.Name (@item.Code)</option>
+                }
+            </InputSelect>
+        </div>
+        <div class="col-2">
+            <ValidationMessage For="() => _booking.ShipperName.Name"></ValidationMessage>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+
+</EditForm>
+
+@using BuildingBlocks.Helpers
+
+@inject IBookingService _bookingService;
+@inject ICompanyService _companyService;
+@inject NavigationManager _navigationManager;
+
+@code {
+    public BookingViewModel _booking = new BookingViewModel();
+
+    public IEnumerable<Company> _companies = new List<Company>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _companies = await _companyService.GetCompaniesAsync();
+    }
+
+    public async void Submit()
+    {
+        await _bookingService.SaveBookingAsync(_booking);
+
+        _navigationManager.NavigateTo("/booking/edit");
+    }
+}

@@ -1,6 +1,6 @@
 ﻿namespace BuildingBlocks.Messaging.IntegrationEvents.Company;
 
-public class CompanyCreated : IntegrationEvent
+public class CompanyCreatedEvent : IntegrationEvent
 {
     public Guid CompanyId { get; set; }
     public string Name { get; set; } = default!;

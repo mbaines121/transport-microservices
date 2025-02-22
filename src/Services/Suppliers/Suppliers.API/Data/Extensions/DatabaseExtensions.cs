@@ -22,6 +22,7 @@ public static class DatabaseExtensions
     {
         if (!await context.Bookings.AnyAsync())
         {
+            await context.Companies.AddRangeAsync(InitialData.Companies);
             await context.Bookings.AddRangeAsync(InitialData.Bookings);
             await context.SaveChangesAsync();
         }
